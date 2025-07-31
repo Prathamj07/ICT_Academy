@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP - Products</title>
+</head>
+<body>
+    <H1>Customer Details</H1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <input type="text" name="c_name" placeholder="Enter Customer Name">
+        <input type ="number" name="c_number" placeholder="Enter Customer Number">
+        <input type ="text" name="c_address" placeholder="Enter Customer Address">
+        <button type="submit">Add Customer</button>
+    </form>
+
+    {% for i in customers%}
+        <div>
+            <h3>{{forloop.counter}} :Name: {{ i.c_name }}</h3>
+            <p>Contact: {{ i.c_contact }} ,Address: {{ i.c_address }}</p>
+           
+        </div>
+    
+    {% endfor %}
+
+    <a href="{% url 'product' %}">
+        <button>Product Section</button>
+
+    <a href="{% url 'bill' %}">
+        <button>Billing Section</button>
+        
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!-- templates/bill_summary.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill Summary</title>
+</head>
+<body>
+    <h1>Bill Summary</h1>
+
+    <p><strong>Customer Name:</strong> {{ bill.customer.c_name }}</p>
+    <p><strong>Bill Date:</strong> {{ bill.date }}</p>
+
+    <h2>Products:</h2>
+    <ul>
+        {% for item in items %}
+            <li>
+                {{ item.product.p_name }} - ₹{{ item.product.p_price }} × {{ item.quantity }}
+                ({{ item.product.p_discount }}% off)
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Total Amount: Rs. {{ total }}</h3>
+
+    <br>
+    <a href="{% url 'bill' %}"><button>Create New Bill</button></a>
+</body>
+</html>

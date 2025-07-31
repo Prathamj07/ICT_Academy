@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Bill</title>
+</head>
+<body>
+    <h1>Create Bill</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Enter Customer ID:</label>
+        <input type="number" name="customer_id" placeholder="Enter Customer ID" required>
+        <br><br>
+        <h4>Available Customers</h4>
+        {% for i in customers%}
+            <div>
+                <p>{{forloop.counter}} :{{ i.c_name }}</p>
+            </div>
+        {% endfor %}
+        <h2>Products</h2>
+
+
+
+        {% for i in items %}
+            <div>
+                <input type="checkbox" name="product_ids" value="{{ i.id }}">
+                {{ forloop.counter }}. {{ i.p_name }} - Rs. {{ i.p_price }} ({{ i.p_discount }}% off)
+                <input type="number" name="quantities" placeholder="Quantity" min="1">
+            </div>
+        {% endfor %}
+
+        <br>
+        <button type="submit">Create Bill</button>
+    </form>
+
+    <a href="{% url 'customer' %}">
+        <button type="button">Show Customers</button>
+    </a>
+
+    <a href="{% url 'product' %}">
+        <button>Product Section</button>
+    </a>
+
+        <h1>All Bills</h1>
+    <table>
+        <tr>
+            <th>Bill ID</th>
+            <th></th>
+            <th>Customer</th>
+            <th></th>
+            <th>Date</th>
+            <th></th>
+            <th>Total Amount</th>
+            <th></th>
+        </tr>
+        {% for b in bills reversed %}
+        <tr>
+            <td>{{ b.id }}</td>
+            <td></td>
+            <td>{{ b.customer.c_name }}</td>
+            <td></td>
+            <td>{{ b.date }}</td>
+            <td></td>
+            <td> Rs {{ b.total_amount }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>
