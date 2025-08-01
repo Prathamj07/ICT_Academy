@@ -14,5 +14,4 @@ class billItem(models.Model):
     bill = models.ForeignKey(bill, on_delete=models.CASCADE)
     product = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-    
 
