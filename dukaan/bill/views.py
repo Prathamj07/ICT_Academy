@@ -22,7 +22,7 @@ def create_bill(request):
                     product=product,
                     quantity=int(qty)
                 )
-             
+               
                 
                 
         return redirect('show_bill', bill_id= bill_instance.id)
